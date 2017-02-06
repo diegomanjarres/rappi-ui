@@ -1,0 +1,66 @@
+<md-dialog flex-gt-sm="40">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{'SHOPPING_CART_TITLE'|translate}}</h2>
+        <span flex></span>
+        <md-button class="md-icon-button"
+            ng-click="cartVm.closeDialog()">
+            <md-icon md-font-icon="fa-close"
+                class="fa fa-lg"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <md-content>
+        <md-list class="md-dense"
+            flex>
+          <md-list-item md-whiteframe="3"
+              class="md-3-line"
+              ng-if="cartVm.productsCount.length==0">
+              <div class="md-list-item-text">
+                    <h2>{{'EMPTY_CAR'|translate}}</h2>
+              </div>
+          </md-list-item>
+          <md-list-item md-whiteframe="3"
+              class="md-3-line"
+              ng-if="cartVm.productsCount.length>0"
+              ng-repeat="product in cartVm.productsCount">
+            <div class="md-list-item-text"
+                layout="row"
+                layout-align="space-around">
+              <span flex></span>
+              <div flex>
+                <h2>{{ product.name }}:</h2></div>
+              <span flex></span>
+              <div flex>
+                <h2>{{ product.qty }}</h2></div>
+              <span flex></span>
+              <md-button class="md-fab md-mini"
+                  ng-click="cartVm.removeFromCart(product)">
+                <md-icon md-font-icon="fa-trash"
+                    class="fa fa-lg">
+                </md-icon>
+              </md-button>
+              <span flex></span>
+            </div>
+          </md-list-item>
+        </md-list>
+      </md-content>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="cartVm.closeDialog()">
+        {{'SHOPPING_CART_CLOSE'|translate}}
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="cartVm.closeDialog()">
+        {{'SHOPPING_CART_ACCEPT'|translate}}
+      </md-button>
+      <md-button ng-click="cartVm.closeDialog()">
+        {{'SHOPPING_CART_CANCEL'|translate}}
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

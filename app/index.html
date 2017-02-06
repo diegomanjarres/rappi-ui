@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en"
+    ng-app="myApp"
+    class="no-js">
+  <!--<![endif]-->
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible"
+        content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description"
+        content="">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+        href="/bower_components/angular-material/angular-material.css">
+
+    <link rel="stylesheet"
+        href="styles/app.css">
+    <link rel="stylesheet"
+        href="styles/font-awesome-4.7.0/css/font-awesome.min.css">
+  </head>
+
+  <body>
+
+    <div layout="column"
+        flex>
+      <div ng-controller="toolbarController as toolbarVm">
+        <md-content>
+          <md-toolbar>
+            <div class="md-toolbar-tools">
+              <h2>
+                <span>Diego Manjarrés</span>
+              </h2>
+              <span flex></span>
+              <md-button ng-click="toolbarVm.openShoppingCart()"
+                  class="md-fab md-mini"
+                  aria-label="shopping cart">
+                <a href="#!/cart">
+                  <md-icon md-font-icon="fa-shopping-cart"
+                      class="fa fa-lg">
+                  </md-icon>
+                </a>
+              </md-button>
+            </div>
+          </md-toolbar>
+        </md-content>
+      </div>
+
+      <div ng-view></div>
+
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/underscore/underscore-min.js"></script>
+      <script src="bower_components/angular-aria/angular-aria.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-material/angular-material.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+      <script src="bower_components/angular-route/angular-route.js"></script>
+      <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+      <script src="app.js"></script>
+      <script src="i18n/spanish.js"></script>
+      <script src="products/products.controller.js"></script>
+      <script src="components/product-info.service.js"></script>
+      <script src="shopping-cart/shopping-cart.service.js"></script>
+      <script src="toolbar/toolbar.controller.js"></script>
+      <script src="shopping-cart/shopping-cart.controller.js"></script>
+
+
+
+    </div>
+  </body>
+
+</html>

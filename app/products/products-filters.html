@@ -1,0 +1,118 @@
+<md-toolbar layout="row"
+    class="md-hue-3">
+  <div class="md-toolbar-tools">
+    <span>{{'FILTERS_TITLE'|translate}}</span>
+  </div>
+  <div>
+
+  <md-button class="md-fab md-mini"
+      ng-click="productsVm.toggleFilters()">
+    <md-icon md-font-icon="fa-filter"
+        class="fa fa-lg">
+    </md-icon>
+  </md-button>
+</div>
+</md-toolbar>
+<md-content md-whiteframe="3"
+    layout="column"
+    layout-align="stretch"
+    style="background-color:lightgoldenrodyellow">
+  <br>
+  <md-list>
+    <md-list-item class="md-3-line">
+      <div class="md-list-item-text"
+          layout="column">
+        <h3>{{'CATEGORIES_FILTER'|translate}} </h3>
+        <div layout="row"
+            layout-wrap
+            layout-align="space-around center">
+          <md-button ng-repeat="category in productsVm.categories"
+              ng-click="productsVm.filters.categories.push(category)"
+              ng-disabled="productsVm.filters.categories.indexOf(category)!=-1"
+              class="md-accent md-raised md-hue-1">{{category.name}}</md-button>
+        </div>
+        <h4>{{'CATEGORIES_FILTER_ACTIVE'|translate}}</h4>
+        <md-chips class="custom-chips"
+            ng-model="productsVm.filters.categories"
+            readonly="true"
+            md-transform-chip="productsVm.updateFilters()"
+            md-removable="true">
+          <md-chip-template>
+            <span>
+               {{$chip.name}}
+            </span>
+          </md-chip-template>
+          <md-icon md-font-icon="fa-close"
+              class="fa fa-lg">
+          </md-icon>
+        </md-chips>
+      </div>
+    </md-list-item>
+    <hr>
+    <md-list-item class="md-3-line">
+      <div class="md-list-item-text"
+          layout="column">
+        <h3>{{'AVAILABILITY_FILTER'|translate}} </h3>
+
+        <md-input-container>
+          <label>Availability</label>
+          <md-select ng-model="productsVm.filters.availability">
+            <md-option><em>any</em></md-option>
+            <md-option ng-value="'available'">
+              {{'PRODUCT_AVAILABLE'|translate}}
+            </md-option>
+            <md-option ng-value="'outOfStock'">
+              {{'PRODUCT_NOT_AVAILABLE'|translate}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </md-list-item>
+    <hr>
+    <md-list-item class="md-3-line">
+      <div class="md-list-item-text"
+          layout="column">
+        <h3>{{'BEST_SELLER_FILTER'|translate}}</h3>
+        <md-switch ng-model="productsVm.filters.bestSeller">
+          {{productsVm.filters.bestSeller?'on':'off'}}
+        </md-switch>
+      </div>
+    </md-list-item>
+    <hr>
+    <md-list-item class="md-3-line">
+      <div class="md-list-item-text"
+          layout="column">
+        <h3>{{'PRICE_FILTER'|translate}}</h3>
+        <div layout="row"
+            layout-wrap>
+          <md-input-container flex>
+            <label>{{'PRICE_FILTER_MORE_THAN'|translate}}</label>
+            <input flex
+                type="number"
+                min="0"
+                max="{{productsVm.filters.maxPrice}}"
+                ng-model="productsVm.filters.minPrice">
+          </md-input-container>
+
+
+          <md-input-container flex>
+            <label>{{'PRICE_FILTER_LESS_THAN'|translate}}</label>
+            <input flex
+                min="{{productsVm.filters.minPrice}}"
+                type="number"
+                ng-model="productsVm.filters.maxPrice">
+          </md-input-container>
+
+        </div>
+      </div>
+    </md-list-item>
+    <md-list-item class="md-2-line">
+      <div class="md-list-item-text"
+          layout="column">
+        <md-button class="md-raised md-primary"
+            ng-click="productsVm.updateFilters()">{{'UPDATE_FILTERS'|translate}}</md-button>
+      </div>
+    </md-list-item>
+
+  </md-list>
+</md-content>

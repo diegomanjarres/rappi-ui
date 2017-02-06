@@ -1,0 +1,127 @@
+<div layout="column"
+    layout-gt-sm="row"
+    flex>
+
+  <div flex="100"
+      flex-gt-sm="20"
+      layout="column"
+      ng-show="productsVm.showFilters"
+      ng-include="'/products/products-filters.html'">
+  </div>
+  <div layout="column"
+      flex>
+    <div flex
+        layout="column">
+
+      <div layout="row"
+          layout-align="end start"
+          layout-wrap>
+        <md-button class="md-fab md-mini"
+            ng-click="productsVm.toggleFilters()"
+            ng-hide="productsVm.showFilters">
+          <md-icon md-font-icon="fa-filter"
+              class="fa fa-lg">
+          </md-icon>
+        </md-button>
+        <span flex></span>
+        <md-button class="md-accent md-raised md-hue-1"
+            ngf-select="productsVm.loadJson($file)">{{'UPLOAD_JSON_FILE'|translate}}</md-button>
+        <md-input-container style="max-height:20px">
+          <label>{{'JSON_URL'|translate}}</label>
+          <input ng-model="productsVm.productInfoUrl">
+        </md-input-container>
+        <md-button class="md-accent md-raised md-hue-1"
+            ng-click="productsVm.refresh()">{{'FETCH_JSON'|translate}}</md-button>
+      </div>
+      <hr>
+      <div layout="row"
+      layout-margin>
+
+        <div layout="row"
+            layout-align="space-between start"
+            layout-wrap
+            layout-margin>
+          <md-button class="md-primary md-raised"
+              ng-click="productsVm.sort('name')">{{'SORT_NAME'|translate}}</md-button>
+          <md-button class="md-primary md-raised"
+              ng-click="productsVm.sort('price-des')">{{'SORT_PRICE_DES'|translate}}</md-button>
+          <md-button class="md-primary md-raised"
+              ng-click="productsVm.sort('price-asc')">{{'SORT_PRICE_ASC'|translate}}</md-button>
+          <md-input-container style="max-height:20px">
+            <label>{{'PRODUCT_SEARCH'|translate}}</label>
+            <input ng-model="productsVm.searchText"
+                ng-change="productsVm.searchByName()">
+          </md-input-container>
+        </div>
+      </div>
+
+    </div>
+    <md-content class="md-padding"
+        layout-xs="column"
+        layout="row"
+        layout-align="space-around center"
+        layout-wrap>
+      <div flex-xs
+          ng-repeat="product in productsVm.products"
+          flex-gt-sm="30"
+          layout="column">
+        <md-card>
+          <img ng-src="{{product.img}}"
+              class="md-card-image"
+              alt="Washed Out">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline"
+                  layout="row"
+                  layout-align="space-around center">
+            {{product.name}}
+            <span flex></span>
+              <span style="font-size:0.7em">
+              ${{product.price}}
+            </span>
+              </span>
+              <span class="md-subhead">{{product.description}}</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <div layout="row">
+              <div>
+                <md-chips class="custom-chips"
+                    ng-model="product.categories"
+                    readonly="true"
+                    md-transform-chip="productsVm.updateFilters()"
+                    md-removable="false">
+                  <md-chip-template>
+                    <span>
+                       {{productsVm.getCategoryNameById($chip)}}
+                    </span>
+                  </md-chip-template>
+                </md-chips>
+              </div>
+              <span flex></span>
+              <div layout="row"
+                  layout-align="end end">
+                <md-icon md-font-icon="fa-star"
+                    class="fa fa-2x"
+                    ng-class="{bestSeller: product.best_seller}">
+                </md-icon>
+                <md-button class="md-icon-button"
+                    ng-click="productsVm.addToCart(product)"
+                    ng-disabled="!product.available">
+                  <md-icon md-font-icon="fa-cart-plus"
+                      class="fa fa-2x"></md-icon>
+                </md-button>
+              </div>
+            </div>
+            <span ng-if="!product.available"
+                style="color:red;float: right;position:absolute">{{'PRODUCT_NOT_AVAILABLE'|translate}}</span>
+          </md-card-content>
+          <md-card-actions layout="row"
+              layout-align="end center">
+          </md-card-actions>
+        </md-card>
+      </div>
+    </md-content>
+  </div>
+
+</div>
